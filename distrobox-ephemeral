@@ -129,7 +129,10 @@ name=$(mktemp -u distrobox-XXXXXXXXXX)
 "${distrobox_path}"/distrobox-create --name ${name} --yes ${create_flags} ${extra_flags}
 # shellcheck disable=SC2086
 "${distrobox_path}"/distrobox-enter "${name}" ${container_command} ${extra_flags}
+exit_status=$?
 # shellcheck disable=SC2086
 "${distrobox_path}"/distrobox-stop "${name}" --yes ${extra_flags}
 # shellcheck disable=SC2086
 "${distrobox_path}"/distrobox-rm --force "${name}" --yes ${extra_flags}
+
+exit "${exit_status}"
